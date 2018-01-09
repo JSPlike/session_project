@@ -1,2 +1,19 @@
 h1 hello
 p Wellcome to the Practical Node.js!
+
+- var user = {}
+- user.admin = Math.random()>0.5
+if user.admin
+  button(class="lanch") Lanunch Spacecraft
+else
+  button(class="login") Log in
+
+
+- var languages = ['php', 'node', 'ruby']
+div
+  each value, index in languages
+    p= index + ". " + value
+
+p
+  :markdown
+    # Practical Node.js
