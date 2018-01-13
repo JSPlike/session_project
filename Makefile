@@ -1,6 +1,10 @@
 REPORTER = list
 MOCHA_OPTS = --ui bdd -c
 
+db:
+	echo Seeding blog-test *****************************************************
+	./seed.sh
+	
 test:
 	clear
 	echo Starting test **********

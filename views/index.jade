@@ -1,19 +1,14 @@
-h1 hello
-p Wellcome to the Practical Node.js!
+extends layout
 
-- var user = {}
-- user.admin = Math.random()>0.5
-if user.admin
-  button(class="lanch") Lanunch Spacecraft
-else
-  button(class="login") Log in
-
-
-- var languages = ['php', 'node', 'ruby']
-div
-  each value, index in languages
-    p= index + ". " + value
-
-p
-  :markdown
-    # Practical Node.js
+block page
+  - var menu = 'index'
+block content
+  if (articles.length === 0)
+    | There's no published content yet.
+    a(href="/login") Log in
+    |  to post and publish.
+  else
+    each article, index in articles
+      div
+        h2
+          a(href="db/articles/#{article.slug}")= article.title
