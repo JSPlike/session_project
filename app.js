@@ -1,3 +1,7 @@
+var TWITTER_CONSUMER_KEY = process.env.cliKrmBEFIpFnCt5WOoCml9vo;
+var TWITTER_CONSUMER_SECRET = process.env.oGARrl1jNsDzu4ckikAwu5Gfuzwxq0m1T9frqclFOdEob85hIB
+;
+
 const express = require('express')
 const routes = require('./routes')
 const http = require('http')
@@ -12,6 +16,9 @@ const collections = {
   users: db.collection('users')
 };
 
+// everyoath 묘듈(인증 모듈)
+const everyauth = require('everyauth')
+
 // Express.js 미들웨어 정리
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
@@ -19,9 +26,39 @@ const logger = require('morgan')
 const errorHandler = require('errorhandler')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-
-const app = express()
+const app = express();
 app.locals.appTitle = '자취 남녀'
+
+// everyoauth using
+everyauth.debug = true;
+everyauth.twitter
+  .consumerKey(TWITTER_CONSUMER_KEY)
+  .consumerSecret(TWITTER_CONSUMER_SECRET)
+  .findOrCreateUser(function(
+    session,
+    accessToken,
+    accessTokenSecret,
+    twitterUserMetadata) {
+      var promise = this.Promise();
+      process.nexTick(function(){
+        if(twitterUserMetadata.screen_name === 'joonyoung') {
+          session.user = twitterUserMetadata;
+          session.admin = true;
+        }
+        promise.fulfill(twitterUserMetadata);
+      })
+      return promise;
+  }
+)
+.redirectPath('/admin');
+
+everyauth.everymodule.handleLogout(routes.user.logout);
+everyauth.everymodule.findUserById(function (user, callback){
+  callback(user);
+})
+
+
+
 
 // Expose collections to request handlers
 app.use((req, res, next) => {
@@ -77,11 +114,11 @@ app.post('/post', routes.article.postArticle)
 app.get('/articles/:slug', routes.article.show)
 
 // REST API routes
+app.all('/api', authorize);
 app.get('/api/articles', routes.article.list)
 app.post('/api/articles', routes.article.add)
 app.put('/api/articles/:id', routes.article.edit)
 app.delete('/api/articles/:id', routes.article.del)
-
 app.all('*', (req, res) => {
   res.status(404).send()
 })
