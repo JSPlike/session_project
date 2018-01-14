@@ -1,10 +1,17 @@
 REPORTER = list
 MOCHA_OPTS = --ui bdd -c
 
+
+start:
+	TWITTER_CONSUMER_KEY=cliKrmBEFIpFnCt5WOoCml9vo \
+	TWITTER_CONSUMER_SECRET=oGARrl1jNsDzu4ckikAwu5Gfuzwxq0m1T9frqclFOdEob85hIB \
+	node app
+
+
 db:
 	echo Seeding blog-test *****************************************************
 	./seed.sh
-	
+
 test:
 	clear
 	echo Starting test **********
@@ -34,6 +41,6 @@ test-module-b:
 	test-example/module-b.js
 	echo Ending test
 
-.PHONY: test test-w test-module-a test-module-b
+.PHONY: test db start
 
 
