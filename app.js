@@ -1,20 +1,16 @@
 var TWITTER_CONSUMER_KEY = process.env.cliKrmBEFIpFnCt5WOoCml9vo;
-var TWITTER_CONSUMER_SECRET = process.env.oGARrl1jNsDzu4ckikAwu5Gfuzwxq0m1T9frqclFOdEob85hIB
-;
+var TWITTER_CONSUMER_SECRET = process.env.oGARrl1jNsDzu4ckikAwu5Gfuzwxq0m1T9frqclFOdEob85hIB;
 
 const express = require('express')
 const routes = require('./routes')
 const http = require('http')
 const path = require('path')
-const mongoskin = require('mongoskin')
+const mongoose = require('mongoose')
+const models = require('./models')
 const dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog'
 
-const db = mongoskin.db(dbUrl, {safe: true})
-
-const collections = {
-  articles: db.collection('articles'),
-  users: db.collection('users')
-};
+// 몽구스 모듈 커넥트
+const db = mongoose.connect(dbUrl, {safe: true})
 
 // everyoath 묘듈(인증 모듈)
 const everyauth = require('everyauth')
@@ -62,9 +58,9 @@ everyauth.everymodule.findUserById(function (user, callback){
 
 // Expose collections to request handlers
 app.use((req, res, next) => {
-  if (!collections.articles || !collections.users)
-    return next(new Error('No collections.'));
-  req.collections = collections;
+  if (!models.Article || !collections.User)
+    return next(new Error('No models!!'));
+  req.models = models;
   return next()
 });
 
@@ -114,9 +110,9 @@ app.get('/', routes.index)
 app.get('/login', routes.user.login)
 app.post('/login', routes.user.authenticate)
 app.get('/logout', routes.user.logout)
-app.get('/admin', routes.article.admin)
-app.get('/post', routes.article.post)
-app.post('/post', routes.article.postArticle)
+app.get('/admin', authorize, routes.article.admin)
+app.get('/post', authorize, routes.article.post)
+app.post('/post', authorize, routes.article.postArticle)
 app.get('/articles/:slug', routes.article.show)
 
 // REST API routes

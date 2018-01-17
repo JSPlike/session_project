@@ -29,3 +29,8 @@ td.action {
 .alert {
   margin-top: 20px;
 }
+.index-img {
+  width : 100%;
+  height: 500px;
+  margin-top: 40px;
+}

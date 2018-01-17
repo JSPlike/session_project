@@ -33,7 +33,7 @@ exports.authenticate = (req, res, next) => {
 		return res.render('login', {
 			error: '아이디와 페스워드를 다시 입력해주세요'
 		});
-	req.collections.users.findOne({
+	req.models.User.findOne({
 		email: req.body.email,
 		password: req.body.password
 	}, function(err, user) {
