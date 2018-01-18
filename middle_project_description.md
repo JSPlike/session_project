@@ -9,7 +9,7 @@
 ```
 MVC 구조의 프로젝트
 --
-<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/mvc.png?raw=true" style="width: 300px height: 400px">
+<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/mvc.png?raw=true" width="300px" height"400px">
 
 >**Note:**
 >
@@ -29,11 +29,11 @@ MVC 구조의 프로젝트
 
 --Makefile--
 
-<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_makefile.png?raw=true" style="width:500px; height:600px">
+<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_makefile.png?raw=true" width="500px" height="600px">
 
 --app.js--
 
-<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_app_js.png?raw=true" style="width:500px; height:500px">
+<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_app_js.png?raw=true" width="500px" height="500px">
 
 ---
 
