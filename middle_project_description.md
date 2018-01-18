@@ -9,7 +9,7 @@
 ```
 MVC 구조의 프로젝트
 --
-<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/mvc.png?raw=true" width="300px" height"400px">
+<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/mvc.png?raw=true" width="300px" height="400px">
 
 >**Note:**
 >
