@@ -17,11 +17,11 @@ exports.show = (req, res, next) => {
  */
 
 exports.list = (req, res, next) => {
-    req.models.Article.list(error, articles) => {
+    req.models.Article.list(function(error, articles) {
         if (error) return next(error)
         res.send({articles: articles})
-    }
-}
+    });
+};
 
 /*
  * POST article API.
@@ -47,12 +47,11 @@ exports.edit = (req, res, next) => {
         req.params.id,
         function(error, article){
             if(error) return next(error);
-            article.update{$set: req.body.article}, (error, count, raw) => {
+            article.update({$set: req.body.article}, (error, count, raw) => {
                 if (error) return next(error)
                 res.send({affectedCount: count});
-            }
-        }
-    );
+            })
+        });
 };
 
 /*
@@ -104,8 +103,8 @@ exports.postArticle = (req, res, next) => {
  */
 
 exports.admin = (req, res, next) => {
-  req.models.Article.list(error, articles) => {
+  req.models.Article.list(function(error, articles) {
     if (error) return next(error);
     res.render('admin', {articles: articles});
-  };
+  });
 }

@@ -58,7 +58,7 @@ everyauth.everymodule.findUserById(function (user, callback){
 
 // Expose collections to request handlers
 app.use((req, res, next) => {
-  if (!models.Article || !collections.User)
+  if (!models.Article || !models.User)
     return next(new Error('No models!!'));
   req.models = models;
   return next()
