@@ -45,7 +45,7 @@ MVC 구조의 프로젝트
 
 --indx.jade--
 
-<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_index.png?raw=true" style="width:500px; height:400px;">
+<img src="https://github.com/JSPlike/session_project/blob/master/doc_img/first_index.png?raw=true" width="500px" height="400px">
 
 >**Note:**
 >
