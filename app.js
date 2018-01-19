@@ -1,13 +1,14 @@
+//twitter API consumer_key and consumer_secret
 var TWITTER_CONSUMER_KEY = process.env.cliKrmBEFIpFnCt5WOoCml9vo;
 var TWITTER_CONSUMER_SECRET = process.env.oGARrl1jNsDzu4ckikAwu5Gfuzwxq0m1T9frqclFOdEob85hIB;
 
-const express = require('express')
-const routes = require('./routes')
-const http = require('http')
-const path = require('path')
-const mongoose = require('mongoose')
-const models = require('./models')
-const dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog'
+const express = require('express') //express module
+const routes = require('./routes') //routes folder 명시
+const http = require('http') //http module 사용
+const path = require('path') //path module 사용
+const mongoose = require('mongoose') //mongoose 패키지사용
+const models = require('./models') //models 관련 folder 사용 명시
+const dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog' //dbUrl MongoDB URL 가져옴
 
 // 몽구스 모듈 커넥트
 const db = mongoose.connect(dbUrl, {safe: true})
@@ -48,6 +49,7 @@ everyauth.twitter
 )
 .redirectPath('/admin');
 
+//everyauth에 대한 callback
 everyauth.everymodule.handleLogout(routes.user.logout);
 everyauth.everymodule.findUserById(function (user, callback){
   callback(user);
@@ -74,6 +76,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+//cookieParser and session 
+// proxy: true와 resave: true , saveUninitialized: true를 안하면 오류 발생
 app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
 app.use(session({
   secret: '2C44774A-D649-4D44-9535-46E296EF984F',
@@ -126,9 +130,10 @@ app.all('*', (req, res) => {
 })
 
 // http.createServer(app).listen(app.get('port'), function(){
-  // console.log('Express server listening on port ' + app.get('port'));
+//  console.log('listening on port ' + app.get('port'));
 // });
 
+//http server 실행
 const server = http.createServer(app)
 const boot = function () {
   server.listen(app.get('port'), function () {
@@ -136,6 +141,7 @@ const boot = function () {
   })
 }
 
+//server shutdown
 const shutdown = function () {
   server.close(process.exit)
 }

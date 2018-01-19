@@ -1,7 +1,13 @@
+// jade layout file
+// made joonyoung
+// head and body for layout
+
 doctype html
 html
   head
     title= appTitle
+    
+    // bootstrap을 사용하기 위한 링크와 스크립트 사용 명시
     script(type="text/javascript", src="/js/jquery-2.0.3.min.js")
     link(rel="stylesheet", href="/css/bootstrap-3.0.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/css/bootstrap-3.0.2/css/bootstrap-theme.min.css")
@@ -10,6 +16,7 @@ html
     script(type="text/javascript", src="/js/blog.js")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
+    //wrap으로 레이아웃
     #wrap
       .container
         h1.page-header= appTitle
